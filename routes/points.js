@@ -22,11 +22,11 @@ router.get('/:id', (request, response, next) => {
 });
 
 router.post('/', (request, response, next) => {
-	const { name, coord, description } = request.body; 
+	const { name, coordinates, description } = request.body; 
 
 	pool.query(
-		'INSERT INTO points(name, coord, description) VALUES ($1, $2, $3)',
-	 [name, coord, description], 
+		'INSERT INTO points(name, coordinates, description) VALUES ($1, $2, $3)',
+	 [name, coordinates, description], 
 	 (err, res) => {
 		if (err) return next(err);
 
@@ -36,7 +36,7 @@ router.post('/', (request, response, next) => {
 
 router.put('/:id', (request, response, next) => {
 	const { id } = request.params; 
-	const keys = ['name', 'coord', 'description'];
+	const keys = ['name', 'coordinates', 'description'];
 	const fields = [];
 
 	keys.forEach(key => {
