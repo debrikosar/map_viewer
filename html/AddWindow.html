@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add</title>
+</head>
+<body>
+	<h3 align="center">Enter new point on the map</h1>
+
+		<form>
+	<table align="center">
+		<tr>
+			<td>Name</td>
+			<td style="width: 200px;"><input id="name" placeholder="Name"/></td>
+		</tr>
+		<tr>
+			<td>Coordinates</td>
+			<td style="width: 200px;">
+				<input id="x" placeholder="Coordinate x"/>
+				<input id="y" placeholder="Coordinate y"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Description</td>
+			<td style="width: 200px;"><input id="descr" placeholder="Description"/></td>
+		</tr>
+	</table>
+
+	<h3 align="center">Control Panel</h1>
+
+	<table align="center">
+		<tr>
+			<td><button id="add">Add</button></td>
+			<td><input type="button" value="Back" onclick="window.location.href='MainWindow.html'"/></td>
+		</tr>
+	</table>
+	</form>
+	<script src="addScript.js"></script>
+</body>
+</html>
