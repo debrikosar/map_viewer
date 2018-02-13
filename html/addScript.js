@@ -1,4 +1,4 @@
-var button = document.querySelector("#add");
+var button = document.getElementById("add");
 button.addEventListener("click", addPoint);
 
 var url = "http://localhost:3000/points";
@@ -9,7 +9,6 @@ function addPoint(){
 	var x = document.getElementById("x").value;
 	var y = document.getElementById("y").value;
 	var testJSON = {"name": name,"coordinates": '(' + x + "," + y + ')' ,"description":descr};
-	alert(name);
 	fetch(url, {  
     method: 'post',   
     body: JSON.stringify(testJSON), 
@@ -21,5 +20,4 @@ function addPoint(){
  	.then((res) => res.json())
     .then((data) =>  console.log(data))
     .catch((err)=> console.log(err))
-    alert("Point added")
 }

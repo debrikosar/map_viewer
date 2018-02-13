@@ -23,8 +23,12 @@ fetch(url)
 
 			h = document.createElement("td");
 			var b1 = document.createElement("button");
-			var b2 = document.createElement("button");	
-			b2.id = i;		
+			var b2 = document.createElement("button");
+
+			b1.addEventListener("click", function(){
+				window.location = "EditWindow.html?id=" + data[i].id;
+			});
+
 			b2.addEventListener("click", function deletePoint(){
 				fetch(url + '/' + data[i].id, {
  					method: 'delete'
@@ -45,6 +49,8 @@ fetch(url)
 		.catch(function(err) {
 			console.log(err);
 		});
+
+
 
 /* var button = document.querySelector("button");
 
