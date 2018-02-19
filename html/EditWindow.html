@@ -2,8 +2,37 @@
 <html>
 <head>
 	<title>Edit</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 <body>
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
+					<span class="sr-only"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="MainWindow.html" class="navbar-brand">
+					Map Viewer
+				</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-nav-demo">
+				<ul class="nav navbar-nav">
+					<li><a href="MainWindow.html">Points</a></li>
+					<li><a href="#">Regions</a></li>
+					<li><a href="#">Users</a></li>
+					<li><a href="#">Help</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Sign Up</a></li>
+					<li><a href="#">Log In</a></li>
+				</ul>
+			<div>	
+		</div>
+	</nav>
+
 	<h3 align="center">Edit point on the map</h1>
 
 		<form>
@@ -29,11 +58,15 @@
 
 	<table align="center">
 		<tr>
-			<td><input type="button" id="edit" value="Edit" onclick="window.location.href='MainWindow.html'"/></td>
-			<td><input type="button" value="Back" onclick="window.location.href='MainWindow.html'"/></td>
+			<td><input type="button" class="btn btn-info" id="edit" value="Edit" onclick="window.location.href='MainWindow.html'"/></td>
+			<td><input type="button" class="btn" value="Back" onclick="window.location.href='MainWindow.html'"/></td>
 		</tr>
 	</table>
 	</form>
-	<script src="editScript.js"></script>
+	<script src="js/editScript.js"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.js"
+			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+			crossorigin="anonymous"></script>
+	<script src="js/bootstrap.js"></script>
 </body>
 </html>

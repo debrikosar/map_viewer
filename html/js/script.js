@@ -1,8 +1,24 @@
 var url = "http://localhost:3000/points";
 var body = document.querySelector("#body");
+var pages = document.querySelector("#pages");
+
 fetch(url)
 		.then((resp) => resp.json())
 		.then(function(data) {
+			//data.length
+			var limit = 5;
+			var pagesCount = Math.ceil(data.length/5);
+
+			for (let i = 0; i < pagesCount; i++){		
+				var page = document.createElement("li");
+				page.className = "page-item";
+				var a = document.createElement("a");
+				a.className = "page-link";
+				a.innerHTML = i+1;
+				page.appendChild(a);
+				pages.appendChild(page);
+			}
+
 			for (let i = 0; i < data.length; i++){						
 			var field = document.createElement("tr");
 
@@ -25,6 +41,9 @@ fetch(url)
 			var b1 = document.createElement("button");
 			var b2 = document.createElement("button");
 
+			b1.className = "btn"; 
+			b2.className = "btn"; 
+
 			b1.addEventListener("click", function(){
 				window.location = "EditWindow.html?id=" + data[i].id;
 			});
@@ -37,8 +56,15 @@ fetch(url)
    				.catch((err)=> console.log(err))
    				window.location.reload(false); 
 			});
-			b1.appendChild(document.createTextNode("edit"));
-			b2.appendChild(document.createTextNode("delete"));
+
+       		var icon = document.createElement("i");
+       		icon.className ="fa fa-pencil";
+       		b1.appendChild(icon);
+
+       		var icon2 = document.createElement("i");
+       		icon2.className ="fa fa-times";
+       		b2.appendChild(icon2);
+
 			h.appendChild(b1);
 			h.appendChild(b2);
 			field.appendChild(h);				

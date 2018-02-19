@@ -3,6 +3,11 @@ const pool = require('../db');
 
 const router = Router();
 
+router.get('/testpage', (request, response, next) => {
+	
+		if (err) return next(err);
+});
+
 router.get('/', (request, response, next) => {
 	pool.query('SELECT * FROM points ORDER BY id ASC', (err, res) => {
 		if (err) return next(err);
@@ -12,6 +17,7 @@ router.get('/', (request, response, next) => {
 });
 
 router.get('/:id', (request, response, next) => {
+	
 	const { id } = request.params; 
 
 	pool.query('SELECT * FROM points WHERE id = $1', [id], (err, res) => {
