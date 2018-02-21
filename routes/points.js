@@ -3,11 +3,6 @@ const pool = require('../db');
 
 const router = Router();
 
-router.get('/testpage', (request, response, next) => {
-	
-		if (err) return next(err);
-});
-
 router.get('/', (request, response, next) => {
 	pool.query('SELECT * FROM points ORDER BY id ASC', (err, res) => {
 		if (err) return next(err);
@@ -23,6 +18,24 @@ router.get('/:id', (request, response, next) => {
 	pool.query('SELECT * FROM points WHERE id = $1', [id], (err, res) => {
 		if (err) return next(err);
 
+		response.json(res.rows);
+	});
+});
+
+router.get('/page/:page', (request, response, next) => {
+	
+	const { page } = request.params; 
+
+	pool.query('SELECT * FROM points OFFSET $1 LIMIT 5', [page*5], (err, res) => {
+		if (err) return next(err);
+
+		response.json(res.rows);
+	});
+});
+
+router.get('/count/page', (request, response, next) => {
+	pool.query('SELECT COUNT (*) FROM points', (err, res) => {
+		if (err) return next(err);
 		response.json(res.rows);
 	});
 });

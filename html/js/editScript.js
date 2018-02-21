@@ -5,8 +5,6 @@ var id = url2.searchParams.get("id");
 var button = document.getElementById("edit");
 button.addEventListener("click", editPoint);
 
-console.log(id);
-
 fetch(url)
 		.then((resp) => resp.json())
 		.then(function(data) {

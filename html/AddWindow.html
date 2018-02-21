@@ -4,6 +4,7 @@
 	<title>Add</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
+
 <body>
 	<nav class="navbar navbar-default">
 		<div class="container">
@@ -14,10 +15,9 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="MainWindow.html" class="navbar-brand">
-					Map Viewer
-				</a>
+				<a href="MainWindow.html" class="navbar-brand">Map Viewer</a>
 			</div>
+
 			<div class="collapse navbar-collapse" id="bs-nav-demo">
 				<ul class="nav navbar-nav">
 					<li><a href="MainWindow.html">Points</a></li>
@@ -33,36 +33,33 @@
 		</div>
 	</nav>
 
-	<h3 align="center">Enter new point on the map</h1>
+	<h3 align="center">Enter new point</h3>
 
-		<form>
-	<table align="center">
+	<form><table align="center">
 		<tr>
 			<td>Name</td>
-			<td style="width: 200px;"><input id="name" placeholder="Name"/></td>
+			<td><input id="name" placeholder="Name" class="form-control"/></td>
 		</tr>
 		<tr>
 			<td>Coordinates</td>
-			<td style="width: 200px;">
-				<input id="x" placeholder="Coordinate x"/>
-				<input id="y" placeholder="Coordinate y"/>
+			<td>
+				<input id="x" placeholder="Coordinate x" class="form-control"/>
+				<input id="y" placeholder="Coordinate y" class="form-control"/>
 			</td>
 		</tr>
 		<tr>
 			<td>Description</td>
-			<td style="width: 200px;"><input id="descr" placeholder="Description"/></td>
+			<td><input id="descr" placeholder="Description" class="form-control"/></td>
 		</tr>
 	</table>
-
-	<h3 align="center">Control Panel</h1>
 
 	<table align="center">
 		<tr>
 			<td><input type="button" class="btn btn-info" id="add" value="Add" onclick="window.location.href='MainWindow.html'"/></td>
 			<td><input type="button" class="btn" value="Back" onclick="window.location.href='MainWindow.html'"/></td>
 		</tr>
-	</table>
-	</form>
+	</table></form>
+
 	<script src="js/addScript.js"></script>
 	<script src="http://code.jquery.com/jquery-3.3.1.js"
 			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
