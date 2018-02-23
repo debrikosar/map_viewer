@@ -8,6 +8,7 @@ var url2 = new URL (window.location);
 var page = url2.searchParams.get("page");
 
 if(!page) page = 1;
+
 render(page-1);
 
 function render(page){
@@ -28,7 +29,8 @@ function render(page){
 
 function createPaginator(data){
 	var pagesCount = Math.ceil(data[0].count/5);
-
+	if(parseInt(page)> pagesCount)
+		window.location = "MainWindow.html?page=" + (parseInt(page)-1);
 	var previous = document.createElement("li");
 	previous.className = "page-item";
 	var aPrevious = document.createElement("a");
@@ -65,7 +67,6 @@ function createPaginator(data){
 	});
 	next.appendChild(aNext);
 	pages.appendChild(next);
-
 }
 
 function showLimited(data){
@@ -103,8 +104,8 @@ function showLimited(data){
 			fetch(url + '/' + data[i].id, {
  				method: 'delete'
   			})
- 			.then((res) => res.json())
-   			.catch((err)=> console.log(err))
+ 			//.then((res) => res.json())
+   			//.catch((err)=> console.log(err))
    			window.location.reload(false); 
 		});
 

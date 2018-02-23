@@ -49,7 +49,7 @@ router.post('/', (request, response, next) => {
 	 (err, res) => {
 		if (err) return next(err);
 
-		response.redirect('/points');
+		response.json(res.rows);
 	});
 });
 
@@ -69,10 +69,10 @@ router.put('/:id', (request, response, next) => {
 		 (err, res) => {
 			if (err) return next(err);
 
-			if (index === fields.length - 1) response.redirect('/points');
+			
 		});
 	});
-	
+	response.json(res.rows);
 });
 
 router.delete('/:id', (request, response, next) => {
