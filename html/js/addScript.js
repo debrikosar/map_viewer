@@ -26,7 +26,7 @@ function addPoint(){
   .then((data) => {
     console.log(data);
     if(data.name!="error")
-      window.location.href='MainWindow.html';
+      window.location.href='Points.html';
     else
       alert("Wrong input");
   })

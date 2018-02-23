@@ -41,7 +41,7 @@ function editPoint(){
     .then((data) => {
     	console.log(data);
     	if(data)
-    	  window.location.href='MainWindow.html';
+    	  window.location.href='Points.html';
  	 })
     .catch((err)=> console.log(err))
 }

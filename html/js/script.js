@@ -30,7 +30,7 @@ function render(page){
 function createPaginator(data){
 	var pagesCount = Math.ceil(data[0].count/5);
 	if(parseInt(page)> pagesCount)
-		window.location = "MainWindow.html?page=" + (parseInt(page)-1);
+		window.location = "Points.html?page=" + (parseInt(page)-1);
 	var previous = document.createElement("li");
 	previous.className = "page-item";
 	var aPrevious = document.createElement("a");
@@ -38,7 +38,7 @@ function createPaginator(data){
 	aPrevious.innerHTML = "Previous";
 	aPrevious.addEventListener("click", function(){
 		if(parseInt(page)>1)
-			window.location = "MainWindow.html?page=" + (parseInt(page)-1);
+			window.location = "Points.html?page=" + (parseInt(page)-1);
 	});
 	previous.appendChild(aPrevious);
 	pages.appendChild(previous);
@@ -50,7 +50,7 @@ function createPaginator(data){
 		a.className = "page-link";
 		a.innerHTML = i+1;
 		a.addEventListener("click", function(){
-			window.location = "MainWindow.html?page=" + (i+1);
+			window.location = "Points.html?page=" + (i+1);
 		});
 		pageItem.appendChild(a);
 		pages.appendChild(pageItem);
@@ -63,7 +63,7 @@ function createPaginator(data){
 	aNext.innerHTML = "Next";
 	aNext.addEventListener("click", function(){
 			if(parseInt(page)<pagesCount)
-			window.location = "MainWindow.html?page=" + (parseInt(page)+1);
+			window.location = "Points.html?page=" + (parseInt(page)+1);
 	});
 	next.appendChild(aNext);
 	pages.appendChild(next);
@@ -90,11 +90,17 @@ function showLimited(data){
 		field.appendChild(h);
 
 		h = document.createElement("td");
+		var b = document.createElement("button");
 		var b1 = document.createElement("button");
 		var b2 = document.createElement("button");
 
+		b.className = "btn"; 
 		b1.className = "btn"; 
 		b2.className = "btn"; 
+
+		b.addEventListener("click", function(){
+			window.location = "Map.html?id=" + data[i].id;
+		});
 
 		b1.addEventListener("click", function(){
 			window.location = "EditWindow.html?id=" + data[i].id;
@@ -109,14 +115,19 @@ function showLimited(data){
    			window.location.reload(false); 
 		});
 
-       	var icon = document.createElement("i");
-       	icon.className ="fa fa-pencil";
-       	b1.appendChild(icon);
+		var icon = document.createElement("i");
+       	icon.className ="fa fa-map-marker";
+       	b.appendChild(icon);
+
+       	var icon1 = document.createElement("i");
+       	icon1.className ="fa fa-pencil";
+       	b1.appendChild(icon1);
 
        	var icon2 = document.createElement("i");
        	icon2.className ="fa fa-times";
        	b2.appendChild(icon2);
 
+		h.appendChild(b);
 		h.appendChild(b1);
 		h.appendChild(b2);
 		field.appendChild(h);				
