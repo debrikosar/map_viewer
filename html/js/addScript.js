@@ -8,6 +8,33 @@ bootstrapValidate('#descr', 'max:100: Description should be less than 100 charac
 bootstrapValidate('#x', 'numeric: Should be numeric');
 bootstrapValidate('#y', 'numeric: Should be numeric');
 
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: {lat: -25.363882, lng: 131.044922 }
+    });
+
+  map.addListener('click', function(e) {
+    placeMarkerAndPanTo(e.latLng, map);
+    });
+  }
+
+var marker;
+
+function placeMarkerAndPanTo(latLng, map) {
+  if (marker)
+    marker.setPosition(latLng);
+  else {
+    marker = new google.maps.Marker({
+    position: latLng,
+    map: map
+    });
+    map.panTo(latLng);
+  }
+  document.getElementById("x").value = latLng.lat();
+  document.getElementById("y").value = latLng.lng();
+}
+
 function addPoint(){
 	var name = document.getElementById("name").value;
 	var descr = document.getElementById("descr").value;

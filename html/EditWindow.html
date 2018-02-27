@@ -3,6 +3,7 @@
 <head>
 	<title>Edit</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -41,6 +42,10 @@
 			<input id="name" placeholder="Name" class="form-control"/>
 		</div>
 		<div class="form-group">
+			<label>Description:</label>
+			<input id="descr" placeholder="Description" class="form-control"/>
+		</div>
+		<div class="form-group">
 			<label>Latitude:</label>
 			<input id="x" placeholder="0.00" class="form-control"/>
 		</div>
@@ -48,9 +53,12 @@
 			<label>Longitude:</label>
 			<input id="y" placeholder="0.00" class="form-control"/>
 		</div>
-		<div class="form-group">
-			<label>Description:</label>
-			<input id="descr" placeholder="Description" class="form-control"/>
+		<div class="block">
+			<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseMap"   aria-expanded="false" aria-controls="collapseMap">
+       		Expand map</button>
+  			<div class="collapse" id="collapseMap">
+   				<div id="map"></div>
+   			</div>
 		</div>
 		<br>
 
@@ -65,6 +73,9 @@
 	<script src="http://code.jquery.com/jquery-3.3.1.js"
 			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 			crossorigin="anonymous"></script>
+	<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsmxdghW4CvGYphVGxneScopSvoLf-cqY">
+  	</script>		
 	<script src="js/bootstrap.js"></script>
 </body>
 </html>

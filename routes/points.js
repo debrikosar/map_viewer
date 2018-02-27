@@ -26,7 +26,7 @@ router.get('/page/:page', (request, response, next) => {
 	
 	const { page } = request.params; 
 
-	pool.query('SELECT * FROM points OFFSET $1 LIMIT 5', [page*5], (err, res) => {
+	pool.query('SELECT * FROM points ORDER BY name OFFSET $1 LIMIT 5', [page*5], (err, res) => {
 		if (err) return next(err);
 
 		response.json(res.rows);

@@ -10,6 +10,40 @@ bootstrapValidate('#descr', 'max:100: Description should be less than 100 charac
 bootstrapValidate('#x', 'numeric: Should be numeric');
 bootstrapValidate('#y', 'numeric: Should be numeric');
 
+var marker;
+
+function initMap() {
+	console.log(parseFloat(document.getElementById("x").value));
+	console.log(document.getElementById("x").value);
+  	var map = new google.maps.Map(document.getElementById('map'), {
+    	zoom: 4,
+   		center: {lat: parseInt(document.getElementById("x").value), lng: parseInt(document.getElementById("y").value) }
+    });
+ 	marker = new google.maps.Marker({
+        	position: {lat: parseFloat(document.getElementById("x").value), 
+        	lng: parseFloat(document.getElementById("y").value)},
+        	map: map
+    });
+  	map.addListener('click', function(e) {
+   		placeMarkerAndPanTo(e.latLng, map);
+    });
+  }
+
+function placeMarkerAndPanTo(latLng, map) {
+  //if (marker)
+    marker.setPosition(latLng);
+ /* else {
+    marker = new google.maps.Marker({
+    position: latLng,
+    map: map
+    });
+    map.panTo(latLng);
+  }*/
+  document.getElementById("x").value = latLng.lat();
+  document.getElementById("y").value = latLng.lng();
+}
+
+
 fetch(url+"/"+id)
 	.then((resp) => resp.json())
 	.then(function(data) {
@@ -17,6 +51,7 @@ fetch(url+"/"+id)
 		document.getElementById("descr").value = data[0].description;
 		document.getElementById("x").value = data[0].coordinates.x;
 		document.getElementById("y").value = data[0].coordinates.y;
+		initMap();
 	})			
 	.catch(function(err) {
 		console.log(err);

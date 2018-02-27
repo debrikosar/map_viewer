@@ -3,6 +3,10 @@
 <head>
 	<title>Add</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<style>
+		
+    </style>
 </head>
 
 <body>
@@ -35,32 +39,42 @@
 
 	<h3 align="center">Enter new point</h3>
 
-	<form><div class="container" style="width: 50%">
-		<div class="form-group">
+	<form><div class="flex-container">
+		<div class="block">
 			<label>Name:</label>
 			<input id="name" placeholder="Name" class="form-control"/>
 		</div>
-		<div class="form-group">
-			<label>Latitude:</label>
-			<input id="x" placeholder="0.00" class="form-control"/>
-		</div>
-		<div class="form-group">
-			<label>Longitude:</label>
-			<input id="y" placeholder="0.00" class="form-control"/>
-		</div>
-		<div class="form-group">
+		<div class="big-block">
 			<label>Description:</label>
 			<input id="descr" placeholder="Description" class="form-control"/>
 		</div>
+		<div class="block">
+			<label>Latitude:</label>
+			<input id="x" placeholder="0.00" class="form-control"/>
+		</div>
+		<div class="block">
+			<label>Longitude:</label>
+			<input id="y" placeholder="0.00" class="form-control"/>
+		</div>
+		<div class="block">
+			<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseMap"   aria-expanded="false" aria-controls="collapseMap">
+       		Expand map</button>
+  			<div class="collapse" id="collapseMap">
+   				<div id="map"></div>
+   			</div>
+		</div>
 
-		<div class="btn-toolbar" align="center">
+		<div class="block">
 			<input type="button" class="btn btn-info" id="add" value="Add"/>
 			<input type="button" class="btn" value="Back" onclick="window.location.href='Points.html'"/>
 		</div>
 	</div></form>
-
+	
 	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/addScript.js"></script>
+	<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsmxdghW4CvGYphVGxneScopSvoLf-cqY&callback=initMap">
+  </script>
 	<script src="http://code.jquery.com/jquery-3.3.1.js"
 			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 			crossorigin="anonymous"></script>
