@@ -13,8 +13,6 @@ bootstrapValidate('#y', 'numeric: Should be numeric');
 var marker;
 
 function initMap() {
-	console.log(parseFloat(document.getElementById("x").value));
-	console.log(document.getElementById("x").value);
   	var map = new google.maps.Map(document.getElementById('map'), {
     	zoom: 4,
    		center: {lat: parseInt(document.getElementById("x").value), lng: parseInt(document.getElementById("y").value) }
@@ -30,15 +28,7 @@ function initMap() {
   }
 
 function placeMarkerAndPanTo(latLng, map) {
-  //if (marker)
-    marker.setPosition(latLng);
- /* else {
-    marker = new google.maps.Marker({
-    position: latLng,
-    map: map
-    });
-    map.panTo(latLng);
-  }*/
+  marker.setPosition(latLng);
   document.getElementById("x").value = latLng.lat();
   document.getElementById("y").value = latLng.lng();
 }
