@@ -25,7 +25,7 @@
 			<div class="collapse navbar-collapse" id="bs-nav-demo">
 				<ul class="nav navbar-nav">
 					<li><a href="Points.html">Points</a></li>
-					<li><a href="#">Regions</a></li>
+					<li><a href="Regions.html?page=1">Regions</a></li>
 					<li><a href="#">Users</a></li>
 					<li><a href="#">Help</a></li>
 				</ul>
@@ -39,24 +39,24 @@
 
 	<h3 align="center">Enter new point</h3>
 
-	<form><div class="flex-container">
-		<div class="block">
+	<form><div class="container" style="width: 50%">
+		<div class="form-group">
 			<label>Name:</label>
 			<input id="name" placeholder="Name" class="form-control"/>
 		</div>
-		<div class="big-block">
+		<div class="form-group">
 			<label>Description:</label>
 			<input id="descr" placeholder="Description" class="form-control"/>
 		</div>
-		<div class="block">
+		<div class="form-group">
 			<label>Latitude:</label>
 			<input id="x" placeholder="0.00" class="form-control"/>
 		</div>
-		<div class="block">
+		<div class="form-group">
 			<label>Longitude:</label>
 			<input id="y" placeholder="0.00" class="form-control"/>
 		</div>
-		<div class="block">
+		<div class="form-group">
 			<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseMap"   aria-expanded="false" aria-controls="collapseMap">
        		Expand map</button>
   			<div class="collapse" id="collapseMap">
@@ -64,7 +64,7 @@
    			</div>
 		</div>
 
-		<div class="block">
+		<div class="form-group">
 			<input type="button" class="btn btn-info" id="add" value="Add"/>
 			<input type="button" class="btn" value="Back" onclick="window.location.href='Points.html'"/>
 		</div>
@@ -72,12 +72,12 @@
 	
 	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/addScript.js"></script>
-	<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsmxdghW4CvGYphVGxneScopSvoLf-cqY&callback=initMap">
-  </script>
 	<script src="http://code.jquery.com/jquery-3.3.1.js"
 			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 			crossorigin="anonymous"></script>
+	<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsmxdghW4CvGYphVGxneScopSvoLf-cqY&callback=initMap">
+  	</script>		
 	<script src="js/bootstrap.js"></script>
 </body>
 </html>

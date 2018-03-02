@@ -9,9 +9,10 @@ bootstrapValidate('#x', 'numeric: Should be numeric');
 bootstrapValidate('#y', 'numeric: Should be numeric');
 
 function initMap() {
+  console.log("hi");
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
-    center: {lat: -25.363882, lng: 131.044922 }
+    center: {lat: 53, lng: 27 }
     });
 
   map.addListener('click', function(e) {

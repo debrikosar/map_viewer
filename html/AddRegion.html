@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>Map viewer</title>
+	<title>Add</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<style>
+		
+    </style>
 </head>
 
 <body>
@@ -17,13 +19,13 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="Points.html" class="navbar-brand">
-					Map Viewer
-				</a>
+				<a href="Points.html" class="navbar-brand">Map Viewer</a>
 			</div>
+
 			<div class="collapse navbar-collapse" id="bs-nav-demo">
 				<ul class="nav navbar-nav">
 					<li><a href="Points.html?page=1">Points</a></li>
+					<li><a href="Regions.html?page=1">Regions</a></li>
 					<li><a href="#">Users</a></li>
 					<li><a href="#">Help</a></li>
 				</ul>
@@ -35,29 +37,26 @@
 		</div>
 	</nav>
 
+	<h3 align="center" id="header">Enter new region</h3>
 
-	<div class="container">
-		<h1 align="center">Regions</h1>
+	<form><div class="container" style="width: 50%">
+		<div class="form-group">
+			<label>Name:</label>
+			<input id="name" placeholder="Name" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Description:</label>
+			<input id="descr" placeholder="Description" class="form-control"/>
+		</div>
+
+		<div class="form-group">
+			<input type="button" class="btn btn-info" id="add"/>
+			<input type="button" class="btn" value="Back" onclick="window.location.href='Regions.html'"/>
+		</div>
+	</div></form>
 	
-		<p align="right">
-			<input type="button" class="btn btn-info" id="add" value="Add" onclick="window.location.href='AddRegion.html?id=0'"/>
-		</p>
-
-		<table class="table" align="center">
-			<thead align="center" style="background-color: #f8f8f8;">
-				<td width="200">Name</td>
-				<td width="600">Description</td>
-				<td width="100">Actions</td>
-			</thead>
-			<tbody id="body" align="center" valign="middle"></tbody>
-		</table>
-
-		<nav>
- 			<ul class="pagination" id="pages"></ul>
-		</nav>
-	</div>
-	
-	<script src="js/showRegions.js"></script>
+	<script src="js/bootstrap-validate.js"></script>
+	<script src="js/addRegion.js"></script>
 	<script src="http://code.jquery.com/jquery-3.3.1.js"
 			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 			crossorigin="anonymous"></script>
