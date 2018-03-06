@@ -103,7 +103,7 @@ function showLimited(data){
 		});
 
 		b1.addEventListener("click", function(){
-			window.location = "EditWindow.html?id=" + data[i].id;
+			window.location = "AddWindow.html?id=" + data[i].id;
 		});
 
 		b2.addEventListener("click", function deletePoint(){

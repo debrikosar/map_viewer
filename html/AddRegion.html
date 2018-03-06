@@ -4,6 +4,7 @@
 	<title>Add</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 	<style>
 		
     </style>
@@ -40,21 +41,66 @@
 	<h3 align="center" id="header">Enter new region</h3>
 
 	<form><div class="container" style="width: 50%">
-		<div class="form-group">
+		<div class="form-group col-md-12">
 			<label>Name:</label>
 			<input id="name" placeholder="Name" class="form-control"/>
 		</div>
-		<div class="form-group">
+		<div class="form-group col-md-12">
 			<label>Description:</label>
 			<input id="descr" placeholder="Description" class="form-control"/>
 		</div>
 
-		<div class="form-group">
-			<input type="button" class="btn btn-info" id="add"/>
+		<div class="form-group col-md-12" align="right">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" title="Add point">
+				<i class="fa fa-plus-square-o"></i>
+   			</button>
+		</div>
+
+		<div class="form-group col-md-12">
+			<div style="overflow: auto; width: 100%; max-height: 200px">
+				<table class="table" align="center">
+					<thead align="center" style="background-color: #f8f8f8;">
+						<td style="width: 50%">X</td>
+						<td style="width: 50%">Y</td>
+					</thead>
+					<tbody id="body" align="center" valign="middle">
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12" align="center">
+			<input type="button" class="btn btn-primary" id="add"/>
 			<input type="button" class="btn" value="Back" onclick="window.location.href='Regions.html'"/>
 		</div>
-	</div></form>
-	
+	</div>
+	</form>
+
+     <div class="modal fade" id="addModal" role="dialog" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">                 		
+                    <h4 class="modal-title" id="myModalLabel">Enter coordinates</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+						<label>Latitude:</label>
+						<input id="x" placeholder="0.00" class="form-control"/>
+					</div>
+					<br>
+					<div>
+						<label>Longitude:</label>
+						<input id="y" placeholder="0.00" class="form-control"/>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button"  id="addPoint" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/addRegion.js"></script>
 	<script src="http://code.jquery.com/jquery-3.3.1.js"

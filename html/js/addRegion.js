@@ -1,10 +1,32 @@
 var button = document.getElementById("add");
+var pointButton = document.getElementById("addPoint");
 var url = "http://localhost:3000/regions";
 var urlActive = new URL (window.location);
 var id = urlActive.searchParams.get("id");
 var head = document.getElementById("header");
+var pointsJSON = {"points":[]};
+var body = document.getElementById("body");
 
-if (id==0) {
+bootstrapValidate('#name', 'max:30: Name should be less than 30 characters');
+bootstrapValidate('#descr', 'max:100: Description should be less than 100 characters');
+bootstrapValidate('#x', 'numeric: Should be numeric');
+bootstrapValidate('#y', 'numeric: Should be numeric');
+
+function render(x, y){
+	var field = document.createElement("tr");
+
+	var h = document.createElement("td");
+	h.appendChild(document.createTextNode(x));
+	field.appendChild(h);
+
+	h = document.createElement("td");
+	h.appendChild(document.createTextNode(y));
+	field.appendChild(h);			
+
+	body.appendChild(field);
+}
+
+if ((id==0) || (id==null)) {
 	button.addEventListener("click", addRegion);
 	button.value = "Add";
 }
@@ -23,8 +45,7 @@ else {
 	head.innerHTML = "Edit region";
 }
 
-bootstrapValidate('#name', 'max:30: Name should be less than 30 characters');
-bootstrapValidate('#descr', 'max:100: Description should be less than 100 characters');
+pointButton.addEventListener("click", addPoint);
 
 function addRegion(){
 	var name = document.getElementById("name").value;
@@ -47,6 +68,8 @@ function addRegion(){
       alert("Wrong input");
   	})
   	.catch((err)=> console.log(err))
+
+
 }
 
 function editRegion(){
@@ -69,4 +92,13 @@ function editRegion(){
     	  window.location.href='Regions.html';
  	 })
     .catch((err)=> console.log(err))
+}
+
+function addPoint(){
+	var x = document.getElementById("x").value;
+	var y = document.getElementById("y").value;
+	var testJSON = {"coordinates": '(' + x + "," + y + ')'};
+	pointsJSON.points[pointsJSON.points.length] = testJSON;
+	console.log(pointsJSON);
+	render(x, y);
 }
