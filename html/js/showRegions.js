@@ -1,5 +1,8 @@
 var url = "http://localhost:3000/regions";
 var body = document.querySelector("#body");
+var clearButton = document.getElementById("clearButton");
+
+clearButton.addEventListener("click", clearPoints);
 
 fetch(url)
 	.then((resp) => resp.json())
@@ -43,6 +46,19 @@ function show(data){
 			fetch(url + '/' + data[i].id, {
  				method: 'delete'
   			})
+  			.then(function() {
+  				fetch(url+"/short/region"+ data[i].id)
+					.then((resp) => resp.json())
+					.then(function(dataLocal) {
+						console.log(dataLocal);
+						for(let i = 0; i < dataLocal.length; i++){
+							fetch(url + '/short/' + dataLocal[i].id, {
+ 								method: 'delete'
+  							})
+						}
+  					})
+			})
+
    			window.location.reload(false); 
 		});
 
@@ -65,4 +81,25 @@ function show(data){
 
 		body.appendChild(field);
 	}
+}
+
+function clearPoints() {
+	fetch(url + "/short")
+	.then((resp) => resp.json())
+	.then((data) => {
+		for(let i = 0; i < data.length; i++){
+			fetch(url + "/id" + data[i].region_id)
+			.then((resp) => resp.json())
+			.then((dataLocal)=>{
+				if(dataLocal.name=="error" || dataLocal.length==0){
+					fetch(url + '/short/' + data[i].id, {
+ 						method: 'delete'
+  					})
+				}
+			})
+		}
+	})
+	.catch(function(err) {
+		console.log(err);
+	});
 }

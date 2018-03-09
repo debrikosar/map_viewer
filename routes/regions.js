@@ -46,12 +46,23 @@ router.get('/short', (request, response, next) => {
 	});
 });
 
+router.get('/short/region:id', (request, response, next) => {
+	
+	const { id } = request.params; 
+
+	pool.query('SELECT * FROM short_points WHERE region_id = $1', [id], (err, res) => {
+		if (err) return next(err);
+
+		response.json(res.rows);
+	});
+});
+
 
 router.post('/', (request, response, next) => {
 	const { name, description } = request.body; 
 
 	pool.query(
-		'INSERT INTO regions(name, description) VALUES ($1, $2)',
+		'INSERT INTO regions(name, description) VALUES ($1, $2) RETURNING id',
 	 [name, description], 
 	 (err, res) => {
 		if (err) return next(err);
@@ -127,6 +138,7 @@ router.delete('/:id', (request, response, next) => {
 	 (err, res) => {
 		if (err) return next(err);
 	});
+	response.json(res.rows);
 });
 
 router.delete('/short/:id', (request, response, next) => {
@@ -138,6 +150,7 @@ router.delete('/short/:id', (request, response, next) => {
 	 (err, res) => {
 		if (err) return next(err);
 	});
+	response.json(res.rows);
 });
 
 

@@ -13,7 +13,7 @@ bootstrapValidate('#y', 'numeric: Should be numeric');
 var marker;
 
 if(id == 0){
-  initMap(53, 27);
+  initMap("53.9", "27.5");
   button.addEventListener("click", addPoint);
 }
 else{
@@ -36,9 +36,10 @@ else{
 
 
 function initMap(x, y) {
+  console.log(x, y);
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    center: {lat: parseInt(x), lng: parseInt(y) }
+    zoom: 8,
+    center: {lat: parseFloat(x), lng: parseFloat(y) }
     });
   if(id!=0){
     marker = new google.maps.Marker({

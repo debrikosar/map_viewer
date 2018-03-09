@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Add</title>
+	<title id="head">Add</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
@@ -38,7 +38,7 @@
 		</div>
 	</nav>
 
-	<h3 align="center" id="header">Enter new region</h3>
+	<h3 align="center" id="title">Enter new region</h3>
 
 	<form><div class="container" style="width: 50%">
 		<div class="form-group col-md-12">
@@ -92,6 +92,15 @@
 						<label>Longitude:</label>
 						<input id="y" placeholder="0.00" class="form-control"/>
 					</div>
+					<br>
+					<div align="center">
+						<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseMap"   aria-expanded="false" aria-controls="collapseMap">
+       					Expand map
+       					</button>
+  						<div class="collapse" id="collapseMap">
+   							<div id="map"></div>
+   						</div>
+   					</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -106,6 +115,9 @@
 	<script src="http://code.jquery.com/jquery-3.3.1.js"
 			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 			crossorigin="anonymous"></script>
+	<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsmxdghW4CvGYphVGxneScopSvoLf-cqY&callback=initMap">
+  	</script>	
 	<script src="js/bootstrap.js"></script>
 </body>
 </html>
