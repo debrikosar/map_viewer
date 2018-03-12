@@ -110,10 +110,10 @@ function editPoint(){
       }
     })
   .then((res) => res.json())
-    .then((data) => {
+  .then((data) => {
       console.log(data);
       if(data)
         window.location.href='Points.html';
-   })
+  })
     .catch((err)=> console.log(err))
 }

@@ -1,12 +1,14 @@
 var button = document.getElementById("add");
 var pointButton = document.getElementById("addPoint");
+var title = document.getElementById("title");
+var head = document.getElementById("head");
+var body = document.getElementById("body");
+
 var url = "http://localhost:3000/regions";
 var urlActive = new URL (window.location);
 var id = urlActive.searchParams.get("id");
-var title = document.getElementById("title");
-var head = document.getElementById("head");
+
 var pointsJSON = {"points":[]};
-var body = document.getElementById("body");
 
 bootstrapValidate('#name', 'max:30: Name should be less than 30 characters');
 bootstrapValidate('#descr', 'max:100: Description should be less than 100 characters');
@@ -20,7 +22,7 @@ if ((id==0) || (id==null)) {
 else {
 	fetch(url+"/id"+id)
 	.then((resp) => resp.json())
-	.then(function(data) {
+	.then(function(data){
 		document.getElementById("name").value = data[0].name;
 		document.getElementById("descr").value = data[0].description;
 	})			
@@ -78,7 +80,29 @@ function render(x, y){
 
 	h = document.createElement("td");
 	h.appendChild(document.createTextNode(y));
-	field.appendChild(h);			
+	field.appendChild(h);		
+
+	var b1 = document.createElement("button");
+	var b2 = document.createElement("button");
+
+	b1.className = "btn"; 
+	b2.className = "btn"; 
+
+	b1.setAttribute('type', 'button');
+	b2.setAttribute('type', 'button');
+
+	var icon1 = document.createElement("i");
+    icon1.className ="fa fa-pencil";
+    b1.appendChild(icon1);
+
+    var icon2 = document.createElement("i");
+    icon2.className ="fa fa-times";
+    b2.appendChild(icon2);
+
+    h = document.createElement("td");
+	h.appendChild(b1);
+	h.appendChild(b2);	
+	field.appendChild(h);
 
 	body.appendChild(field);
 }
@@ -86,17 +110,23 @@ function render(x, y){
 function addRegion(){
 	var name = document.getElementById("name").value;
 	var descr = document.getElementById("descr").value;
-	var testJSON = {"name": name, "description":descr};
-	fetch(url, {  
+	var testJSON = {"name": name, "description":descr, "points": pointsJSON.points};
+	fetch(url + "/complex", {  
     method: 'post',   
     body: JSON.stringify(testJSON), 
   	headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+    	'Accept': 'application/json',
+    	'Content-Type': 'application/json'
    		}
   	})
  	.then((res) => res.json())
-  	.then((data) => loadPoints(data, data[0].id))
+  	.then((data) => {
+    	console.log(data);
+    	if(data.name!="error")
+    		window.location.href='Regions.html';
+ 		else
+     		alert("Wrong input");
+  	})
   	.catch((err)=> console.log(err)) 	
 }
 
@@ -114,7 +144,7 @@ function editRegion(){
    		}
   	})
  	.then((res) => res.json())
-    .then((data) => loadPoints(data, id))
+    .then((data) => savePoints(data, id))
     .catch((err)=> console.log(err))
 }
 
@@ -123,13 +153,13 @@ pointButton.addEventListener("click", addPoint);
 function addPoint(){
 	var x = document.getElementById("x").value;
 	var y = document.getElementById("y").value;
-	var testJSON = {"coordinates": '(' + x + "," + y + ')'};
-	pointsJSON.points[pointsJSON.points.length] = testJSON;
+	var testJSON = {"coordinates": "(" + x + ", " + y + ")"};
+	pointsJSON.points[pointsJSON.points.length] = "(" + x + ", " + y + ")";
 	console.log(pointsJSON);
 	render(x, y);
 }
 
-function loadPoints(data, rg_id){
+function savePoints(data, rg_id){
 	var pointJSON = {"region_id": rg_id, "coordinates": 0};
 	for (let i = 0; i < pointsJSON.points.length; i++){	
   		pointJSON.coordinates = pointsJSON.points[i].coordinates;
@@ -143,9 +173,5 @@ function loadPoints(data, rg_id){
    				}
   			})
   		.catch((err) => console.log(err))	
-  		}
-    if(data.name!="error")
-    	window.location.href='Regions.html';
-    else
-     	alert("Wrong input");  		
+  		}  		
 }

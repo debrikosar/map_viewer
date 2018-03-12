@@ -34,6 +34,7 @@ router.get('/located', (request, response, next) => {
 router.get('/count', (request, response, next) => {
 	pool.query('SELECT COUNT (*) FROM regions', (err, res) => {
 		if (err) return next(err);
+
 		response.json(res.rows);
 	});
 });
@@ -42,6 +43,7 @@ router.get('/count', (request, response, next) => {
 router.get('/short', (request, response, next) => {
 	pool.query('SELECT * FROM short_points', (err, res) => {
 		if (err) return next(err);
+
 		response.json(res.rows);
 	});
 });
@@ -82,6 +84,35 @@ router.post('/short', (request, response, next) => {
 
 		response.json(res.rows);
 	});
+});
+
+router.post('/complex', (request, response, next) => {
+	const { name, description, points} = request.body;
+
+	saveRegions();
+	response.json(res.rows);
+
+	function saveRegions() {
+		pool.query(
+			'INSERT INTO regions(name, description) VALUES ($1, $2) RETURNING id',
+	 	[name, description], 
+	 	(err, res) => {
+			if (err) return next(err);
+
+			savePoints(res.rows[0].id);
+		});
+	}
+
+	function savePoints(region_id){
+		for(let i = 0; i < points.length; i++){
+			pool.query(
+				'INSERT INTO short_points(region_id, coordinates) VALUES ($1, $2)',
+	 			[region_id, points[i]], 
+	 			(err, res) => {
+					if (err) return next(err);
+				});
+		}
+	}
 });
 
 router.put('/:id', (request, response, next) => {
