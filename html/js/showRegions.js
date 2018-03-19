@@ -1,15 +1,75 @@
 var url = "http://localhost:3000/regions";
 var body = document.querySelector("#body");
-var clearButton = document.getElementById("clearButton");
+var pages = document.querySelector("#pages");
+//var clearButton = document.getElementById("clearButton");
 
-clearButton.addEventListener("click", clearPoints);
+var url2 = new URL (window.location);
+var page = url2.searchParams.get("page");
 
-fetch(url)
-	.then((resp) => resp.json())
-	.then((data) => show(data))
-	.catch(function(err) {
-		console.log(err);
+if(!page) page = 1;
+
+//clearButton.addEventListener("click", clearPoints);
+
+render(page-1);
+
+function render(page){
+	fetch(url+"/count/page")
+		.then((resp) => resp.json())
+		.then((data) => createPaginator(data))
+		.catch(function(err) {
+			console.log(err);
+		});
+
+	fetch(url+"/page/"+page)
+		.then((resp) => resp.json())
+		.then((data) => show(data))
+		.catch(function(err) {
+			console.log(err);
+		});
+}
+
+
+function createPaginator(data){
+	var pagesCount = Math.ceil(data[0].count/5);
+	if(parseInt(page) > pagesCount)
+		window.location = "Regions.html?page=" + (parseInt(page)-1);
+	var previous = document.createElement("li");
+	previous.className = "page-item";
+	var aPrevious = document.createElement("a");
+	aPrevious.className = "page-link";
+	aPrevious.innerHTML = "Previous";
+	aPrevious.addEventListener("click", function(){
+		if(parseInt(page)>1)
+			window.location = "Regions.html?page=" + (parseInt(page)-1);
 	});
+	previous.appendChild(aPrevious);
+	pages.appendChild(previous);
+
+	for (let i = 0; i < pagesCount; i++){		
+		var pageItem = document.createElement("li");
+		pageItem.className = "page-item";
+		var a = document.createElement("a");
+		a.className = "page-link";
+		a.innerHTML = i+1;
+		a.addEventListener("click", function(){
+			window.location = "Regions.html?page=" + (i+1);
+		});
+		pageItem.appendChild(a);
+		pages.appendChild(pageItem);
+	}
+
+	var next = document.createElement("li");
+	next.className = "page-item";
+	var aNext = document.createElement("a");
+	aNext.className = "page-link";
+	aNext.innerHTML = "Next";
+	aNext.addEventListener("click", function(){
+			if(parseInt(page)<pagesCount)
+			window.location = "Regions.html?page=" + (parseInt(page)+1);
+	});
+	next.appendChild(aNext);
+	pages.appendChild(next);
+}
 
 function show(data){
 	for (let i = 0; i < data.length; i++){						
@@ -46,18 +106,6 @@ function show(data){
 			fetch(url + '/' + data[i].id, {
  				method: 'delete'
   			})
-  			.then(function() {
-  				fetch(url+"/short/region"+ data[i].id)
-					.then((resp) => resp.json())
-					.then(function(dataLocal) {
-						console.log(dataLocal);
-						for(let i = 0; i < dataLocal.length; i++){
-							fetch(url + '/short/' + dataLocal[i].id, {
- 								method: 'delete'
-  							})
-						}
-  					})
-			})
 
    			window.location.reload(false); 
 		});
@@ -84,7 +132,7 @@ function show(data){
 }
 
 function clearPoints() {
-	fetch(url + "/short")
+	fetch(url + "/short/all")
 	.then((resp) => resp.json())
 	.then((data) => {
 		for(let i = 0; i < data.length; i++){

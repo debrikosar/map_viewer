@@ -54,7 +54,6 @@ function initMap(x, y) {
   }
 
 
-
 function placeMarkerAndPanTo(latLng, map) {
   if (marker)
     marker.setPosition(latLng);

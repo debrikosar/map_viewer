@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title id="head">Add</title>
+	<title id="titleName">Add</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
@@ -38,7 +38,7 @@
 		</div>
 	</nav>
 
-	<h3 align="center" id="title">Enter new region</h3>
+	<h3 align="center" id="heading">Enter new region</h3>
 
 	<form><div class="container" style="width: 50%">
 		<div class="form-group col-md-12">
@@ -51,27 +51,27 @@
 		</div>
 
 		<div class="form-group col-md-12" align="right">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" title="Add point">
+			<button type="button" class="btn btn-primary" id="openModal" data-toggle="modal" data-target="#addModal" title="Add point">
 				<i class="fa fa-plus-square-o"></i>
    			</button>
 		</div>
 
 		<div class="form-group col-md-12">
 			<div style="overflow: auto; width: 100%; max-height: 200px">
-				<table class="table" align="center">
+				<table class="table" align="center" id="pointsTable">
 					<thead align="center" style="background-color: #f8f8f8;">
 						<td style="width: 35%">X</td>
 						<td style="width: 35%">Y</td>
 						<td style="width: 30%">Actions</td>
 					</thead>
-					<tbody id="body" align="center" valign="middle">
+					<tbody id="tableBody" align="center" valign="middle">
 					</tbody>
 				</table>
 			</div>
 		</div>
 
 		<div class="form-group col-md-12" align="center">
-			<input type="button" class="btn btn-primary" id="add"/>
+			<input type="button" class="btn btn-primary" id="submitRegion"/>
 			<input type="button" class="btn" value="Back" onclick="window.location.href='Regions.html'"/>
 		</div>
 	</div>
@@ -95,7 +95,9 @@
 					</div>
 					<br>
 					<div align="center">
-						<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseMap"   aria-expanded="false" aria-controls="collapseMap">
+						<input type="hidden" id="hiddenMode">
+						<input type="hidden" id="hiddenId">
+						<button class="btn btn-primary" id="expandMap" type="button" data-toggle="collapse" data-target="#collapseMap" aria-expanded="false" aria-controls="collapseMap">
        					Expand map
        					</button>
   						<div class="collapse" id="collapseMap">
@@ -103,9 +105,9 @@
    						</div>
    					</div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" id="panel">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button"  id="addPoint" class="btn btn-primary">Save</button>
+                    <button type="button"  id="submitPoint" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
