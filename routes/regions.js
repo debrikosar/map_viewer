@@ -112,6 +112,7 @@ router.post('/complex', (request, response, next) => {
 	 	(err, res) => {
 			if (err) return next(err);
 
+
 			savePoints(res.rows[0].id);
 		});
 	}
@@ -154,24 +155,6 @@ router.put('/:id', (request, response, next) => {
 router.put('/short/:id', (request, response, next) => {
 	const { id } = request.params; 
 	const { x, y } = request.body;
-
-	/*const keys = ['region_id', 'coordinates'];
-	const fields = [];
-
-	keys.forEach(key => {
-		if (request.body[key]) fields.push(key);
-	});*/
-
-	/*fields.forEach((field, index) => {
-		pool.query(
-			`UPDATE short_points SET ${field}=($1) WHERE id=($2)`,
-		 [request.body[field], id], 
-		 (err, res) => {
-			if (err) return next(err);
-
-			
-		});
-	});*/
 
 	var point = '(' + x + ', ' + y + ')';
 	console.log(point);

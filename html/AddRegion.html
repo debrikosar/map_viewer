@@ -43,11 +43,11 @@
 	<form><div class="container" style="width: 50%">
 		<div class="form-group col-md-12">
 			<label>Name:</label>
-			<input id="name" placeholder="Name" class="form-control"/>
+			<input id="regionName" placeholder="Name" class="form-control"/>
 		</div>
 		<div class="form-group col-md-12">
 			<label>Description:</label>
-			<input id="descr" placeholder="Description" class="form-control"/>
+			<input id="regionDescription" placeholder="Description" class="form-control"/>
 		</div>
 
 		<div class="form-group col-md-12" align="right">
@@ -86,12 +86,12 @@
                 <div class="modal-body">
                     <div>
 						<label>Latitude:</label>
-						<input id="x" placeholder="0.00" class="form-control"/>
+						<input id="pointLatitude" placeholder="0.00" class="form-control"/>
 					</div>
 					<br>
 					<div>
 						<label>Longitude:</label>
-						<input id="y" placeholder="0.00" class="form-control"/>
+						<input id="pointLongitude" placeholder="0.00" class="form-control"/>
 					</div>
 					<br>
 					<div align="center">
@@ -114,13 +114,14 @@
     </div>
 
 	<script src="js/bootstrap-validate.js"></script>
+		<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsmxdghW4CvGYphVGxneScopSvoLf-cqY">
+  	</script>	
 	<script src="js/addRegion.js"></script>
 	<script src="http://code.jquery.com/jquery-3.3.1.js"
 			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 			crossorigin="anonymous"></script>
-	<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsmxdghW4CvGYphVGxneScopSvoLf-cqY&callback=initMap">
-  	</script>	
+
 	<script src="js/bootstrap.js"></script>
 </body>
 </html>

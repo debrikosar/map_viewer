@@ -14,18 +14,23 @@ var psqlUrl = "http://localhost:3000/regions";
 var activeUrl = new URL (window.location);
 var regionId = activeUrl.searchParams.get("id");
 
-var pointsJSON = {"points":[]};
+var pointsJSON = {"points":[], "mode":[]};
 
-bootstrapValidate('#name', 'max:30: Name should be less than 30 characters');
-bootstrapValidate('#descr', 'max:100: Description should be less than 100 characters');
-bootstrapValidate('#x', 'numeric: Should be numeric');
-bootstrapValidate('#y', 'numeric: Should be numeric');
+bootstrapValidate('#regionName', 'max:30: Name should be less than 30 characters');
+bootstrapValidate('#regionName', 'min:3: Name should be more than 3 characters');
+bootstrapValidate('#regionDescription', 'max:100: Description should be less than 100 characters');
+bootstrapValidate('#regionDescription', 'min:3: Description should be more than 3 characters');
+bootstrapValidate('#pointLatitude', 'numeric: Should be numeric');
+bootstrapValidate('#pointLongitude', 'numeric: Should be numeric');
+bootstrapValidate('#pointLatitude', 'required: Please fill out this field');
+bootstrapValidate('#pointLongitude', 'required: Please fill out this field');
 
 openModal.addEventListener("click", function() {
-	console.log("why are u here");
 	submitPoint.removeEventListener("click", editPoint);
 	submitPoint.addEventListener("click", addPoint);
 });
+
+initMap(53.9, 27.5);
 
 if ((regionId==0) || (regionId==null)) {
 	submitRegion.addEventListener("click", addRegion);
@@ -35,8 +40,8 @@ else {
 	fetch(psqlUrl+"/"+regionId)
 	.then((resp) => resp.json())
 	.then(function(data){
-		document.getElementById("name").value = data[0].name;
-		document.getElementById("descr").value = data[0].description;
+		document.getElementById("regionName").value = data[0].name;
+		document.getElementById("regionDescription").value = data[0].description;
 	})			
 	.catch(function(err) {
 		console.log(err);
@@ -48,16 +53,20 @@ else {
 	titleName.innerHTML = "Edit";
 }
 
-function initMap() {
+function initMap(x, y) {
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 8,
-    	center: {lat: 53.9, lng: 27.5 }
+    	center: {lat: parseFloat(x), lng: parseFloat(y) }
     });
-    marker = new google.maps.Marker({
-        position: {lat: parseFloat(x), 
-        lng: parseFloat(y)},
-        map: map
-    });
+
+    if(hiddenId!=0){
+    	marker = new google.maps.Marker({
+        	position: {lat: parseFloat(x), 
+        	lng: parseFloat(y)},
+        	map: map
+   		});
+    }
+
   	map.addListener('click', function(e) {
     	placeMarkerAndPanTo(e.latLng, map);
     });
@@ -73,8 +82,8 @@ function placeMarkerAndPanTo(latLng, map) {
     	});
    		map.panTo(latLng);
   	}
-	document.getElementById("x").value = latLng.lat();
-	document.getElementById("y").value = latLng.lng();
+	document.getElementById("pointLatitude").value = latLng.lat();
+	document.getElementById("pointLongitude").value = latLng.lng();
 }
 
 function render(data, id, mode){
@@ -107,12 +116,21 @@ function render(data, id, mode){
     b2.appendChild(icon2);
 
     b1.addEventListener("click", function(){
-		document.getElementById("x").value = data.x;
-		document.getElementById("y").value = data.y;
+		document.getElementById("pointLatitude").value = data.x;
+		document.getElementById("pointLongitude").value = data.y;
 		hiddenMode.value = mode;
 		hiddenId.value = id;
 		submitPoint.removeEventListener("click", addPoint);
 		submitPoint.addEventListener("click", editPoint);
+
+		initMap(data.x, data.y);
+		/*
+		marker = new google.maps.Marker({
+        	position: {lat: parseFloat(data.x), 
+        	lng: parseFloat(data.x)},
+        	map: map
+   		});*/
+
 		$("#addModal").modal("show");
 	});
 
@@ -142,8 +160,8 @@ function render(data, id, mode){
 
 
 function addRegion(){
-	var name = document.getElementById("name").value;
-	var descr = document.getElementById("descr").value;
+	var name = document.getElementById("regionName").value;
+	var descr = document.getElementById("regionDescription").value;
 	var testJSON = {"name": name, "description":descr, "points": pointsJSON.points};
 	fetch(psqlUrl + "/complex", {  
     method: 'post',   
@@ -165,8 +183,8 @@ function addRegion(){
 }
 
 function editRegion(){
-	var name = document.getElementById("name").value;
-	var descr = document.getElementById("descr").value;
+	var name = document.getElementById("regionName").value;
+	var descr = document.getElementById("regionDescription").value;
 	var testJSON = {"name": name, "description":descr, "points": pointsJSON.points};
 	
 	fetch(psqlUrl+"/complex/"+regionId, {  
@@ -189,19 +207,21 @@ function editRegion(){
 }
 
 function addPoint(){
-	var x = document.getElementById("x").value;
-	var y = document.getElementById("y").value;
+	var x = document.getElementById("pointLatitude").value;
+	var y = document.getElementById("pointLongitude").value;
 	pointsJSON.points[pointsJSON.points.length] = {"x": x, "y": y};
+	pointsJSON.mode[pointsJSON.mode.length] = "a";
 	render(pointsJSON.points[pointsJSON.points.length-1], pointsJSON.points.length-1,  "a");
 }
 
 function editPoint() {
-	tempJSON = {"x": document.getElementById("x").value, "y": document.getElementById("y").value};
+	tempJSON = {"x": document.getElementById("pointLatitude").value, "y": document.getElementById("pointLongitude").value};
 
 	console.log(hiddenMode.value);
 
 	if(hiddenMode.value == "a"){
 		pointsJSON.points[hiddenId.value] = tempJSON;
+		
 	}
 	if(hiddenMode.value == "e"){
 		fetch(psqlUrl+"/short/"+hiddenId.value, {  

@@ -86,11 +86,11 @@ function show(data){
 		field.appendChild(h);
 
 		h = document.createElement("td");
-		//var b = document.createElement("button");
+		var b = document.createElement("button");
 		var b1 = document.createElement("button");
 		var b2 = document.createElement("button");
 
-		//b.className = "btn"; 
+		b.className = "btn"; 
 		b1.className = "btn"; 
 		b2.className = "btn"; 
 
@@ -110,9 +110,9 @@ function show(data){
    			window.location.reload(false); 
 		});
 
-		/*var icon = document.createElement("i");
+		var icon = document.createElement("i");
        	icon.className ="fa fa-map-marker";
-       	b.appendChild(icon);*/
+       	b.appendChild(icon);
 
        	var icon1 = document.createElement("i");
        	icon1.className ="fa fa-pencil";
@@ -122,7 +122,7 @@ function show(data){
        	icon2.className ="fa fa-times";
        	b2.appendChild(icon2);
 
-		//h.appendChild(b);
+		h.appendChild(b);
 		h.appendChild(b1);
 		h.appendChild(b2);
 		field.appendChild(h);				
