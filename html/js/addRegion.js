@@ -9,6 +9,7 @@ var openModal = document.getElementById("openModal");
 var hiddenMode = document.getElementById("hiddenMode");
 var hiddenId = document.getElementById("hiddenId");
 var tempJSON;
+var marker;
 
 var psqlUrl = "http://localhost:3000/regions";
 var activeUrl = new URL (window.location);
@@ -16,7 +17,9 @@ var regionId = activeUrl.searchParams.get("id");
 
 var pointsJSON = {"points":[], "mode":[]};
 
-bootstrapValidate('#regionName', 'max:30: Name should be less than 30 characters');
+bootstrapValidate('#regionName', 'max:30: Name should be less than 30 characters', function(isValid){
+	console.log(isValid);
+});
 bootstrapValidate('#regionName', 'min:3: Name should be more than 3 characters');
 bootstrapValidate('#regionDescription', 'max:100: Description should be less than 100 characters');
 bootstrapValidate('#regionDescription', 'min:3: Description should be more than 3 characters');
@@ -27,10 +30,13 @@ bootstrapValidate('#pointLongitude', 'required: Please fill out this field');
 
 openModal.addEventListener("click", function() {
 	submitPoint.removeEventListener("click", editPoint);
+	hiddenId.value=-1;
+	marker=null;
+	initMap(53.9, 27.5);
 	submitPoint.addEventListener("click", addPoint);
 });
 
-initMap(53.9, 27.5);
+//initMap(53.9, 27.5);
 
 if ((regionId==0) || (regionId==null)) {
 	submitRegion.addEventListener("click", addRegion);
@@ -59,7 +65,8 @@ function initMap(x, y) {
     	center: {lat: parseFloat(x), lng: parseFloat(y) }
     });
 
-    if(hiddenId!=0){
+	console.log(hiddenId.value);
+    if(hiddenId.value!=-1){
     	marker = new google.maps.Marker({
         	position: {lat: parseFloat(x), 
         	lng: parseFloat(y)},
@@ -73,6 +80,7 @@ function initMap(x, y) {
 }
 
 function placeMarkerAndPanTo(latLng, map) {
+	console.log(marker);
 	if (marker)
 		marker.setPosition(latLng);
 	else {

@@ -1,50 +1,50 @@
-var button = document.getElementById("add");
+var submitButton = document.getElementById("add");
 var urlActive = new URL (window.location);
-var id = urlActive.searchParams.get("id");
-var head = document.getElementById("header");
+var pointId = urlActive.searchParams.get("id");
+var heading = document.getElementById("heading");
 
-var url = "http://localhost:3000/points";
+var psqlUrl = "http://localhost:3000/points";
 
-bootstrapValidate('#name', 'max:30 : Name should be less than 30 characters');
-bootstrapValidate('#descr', 'max:100 | min:4 ');
-bootstrapValidate('#x', 'numeric: Should be numeric');
-bootstrapValidate('#y', 'numeric: Should be numeric');
+bootstrapValidate('#pointName', 'max:30 : Name should be less than 30 characters');
+bootstrapValidate('#pointDescription', 'max:100 : description should be less than 100 characters ');
+bootstrapValidate('#pointLatitude', 'numeric: Should be numeric');
+bootstrapValidate('#pointLongitude', 'numeric: Should be numeric');
 
 var marker;
 
-if(id == 0){
+if(pointId == 0){
   initMap("53.9", "27.5");
-  button.addEventListener("click", addPoint);
+  submitButton.addEventListener("click", addPoint);
 }
 else{
-  fetch(url+"/"+id)
+  fetch(psqlUrl+"/"+pointId)
   .then((resp) => resp.json())
   .then(function(data) {
-    document.getElementById("name").value = data[0].name;
-    document.getElementById("descr").value = data[0].description;
-    document.getElementById("x").value = data[0].coordinates.x;
-    document.getElementById("y").value = data[0].coordinates.y;
+    document.getElementById("pointName").value = data[0].name;
+    document.getElementById("pointDescription").value = data[0].description;
+    document.getElementById("pointLatitude").value = data[0].coordinates.x;
+    document.getElementById("pointLongitude").value = data[0].coordinates.y;
     initMap(data[0].coordinates.x, data[0].coordinates.y);
   })      
   .catch(function(err) {
     console.log(err);
   });
-  button.addEventListener("click", editPoint);
-  button.value = "Save";
-  head.innerHTML = "Edit point";
+  submitButton.addEventListener("click", editPoint);
+  submitButton.value = "Save";
+  heading.innerHTML = "Edit point";
 }
 
 
-function initMap(x, y) {
-  console.log(x, y);
+function initMap(pointLatitude, pointLongitude) {
+  console.log(pointLatitude, pointLongitude);
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
-    center: {lat: parseFloat(x), lng: parseFloat(y) }
+    center: {lat: parseFloat(pointLatitude), lng: parseFloat(pointLongitude) }
     });
-  if(id!=0){
+  if(pointId!=0){
     marker = new google.maps.Marker({
-          position: {lat: parseFloat(x), 
-          lng: parseFloat(y)},
+          position: {lat: parseFloat(pointLatitude), 
+          lng: parseFloat(pointLongitude)},
           map: map
     });
   }
@@ -64,17 +64,17 @@ function placeMarkerAndPanTo(latLng, map) {
     });
     map.panTo(latLng);
   }
-  document.getElementById("x").value = latLng.lat();
-  document.getElementById("y").value = latLng.lng();
+  document.getElementById("pointLatitude").value = latLng.lat();
+  document.getElementById("pointLongitude").value = latLng.lng();
 }
 
 function addPoint(){
-	var name = document.getElementById("name").value;
-	var descr = document.getElementById("descr").value;
-	var x = document.getElementById("x").value;
-	var y = document.getElementById("y").value;
-	var testJSON = {"name": name,"coordinates": '(' + x + "," + y + ')' ,"description":descr};
-	fetch(url, {  
+	var pointName = document.getElementById("pointName").value;
+	var pointDescription = document.getElementById("pointDescription").value;
+	var pointLatitude = document.getElementById("pointLatitude").value;
+	var pointLongitude = document.getElementById("pointLongitude").value;
+	var testJSON = {"name": pointName,"coordinates": '(' + pointLatitude + "," + pointLongitude + ')' ,"description":pointDescription};
+	fetch(psqlUrl, {  
     method: 'post',   
     body: JSON.stringify(testJSON), 
   	headers: {
@@ -94,13 +94,13 @@ function addPoint(){
 }
 
 function editPoint(){
-  var name = document.getElementById("name").value;
-  var descr = document.getElementById("descr").value;
-  var x = document.getElementById("x").value;
-  var y = document.getElementById("y").value;
-  var testJSON = {"name": name,"coordinates": '(' + x + "," + y + ')' ,"description":descr};
+  var pointName = document.getElementById("pointName").value;
+  var pointDescription = document.getElementById("pointDescription").value;
+  var pointLatitude = document.getElementById("pointLatitude").value;
+  var pointLongitude = document.getElementById("pointLongitude").value;
+  var testJSON = {"name": pointName,"coordinates": '(' + pointLatitude + "," + pointLongitude + ')' ,"description":pointDescription};
   
-  fetch(url+"/"+id, {  
+  fetch(psqlUrl+"/"+pointId, {  
     method: 'put',   
     body: JSON.stringify(testJSON), 
     headers: {
