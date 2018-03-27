@@ -94,9 +94,9 @@ function show(data){
 		b1.className = "btn"; 
 		b2.className = "btn"; 
 
-		/*b.addEventListener("click", function(){
-			window.location = "Map.html?id=" + data[i].id;
-		});*/
+		b.addEventListener("click", function(){
+			window.location = "RegionMap.html?id=" + data[i].id;
+		});
 
 		b1.addEventListener("click", function(){
 			window.location = "AddRegion.html?id=" + data[i].id;

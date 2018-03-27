@@ -1,7 +1,6 @@
 var url = "http://localhost:3000/points";
 var urlActive = new URL (window.location);
 var id = urlActive.searchParams.get("id");
-var uluru;
 
 function initMap() {
 	fetch(url+"/"+id)

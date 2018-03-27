@@ -59,6 +59,10 @@ else {
 	titleName.innerHTML = "Edit";
 }
 
+function checkValidation(isValid){
+
+}
+
 function initMap(x, y) {
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 8,

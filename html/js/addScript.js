@@ -1,4 +1,4 @@
-var submitButton = document.getElementById("add");
+var submitButton = document.getElementById("submitButton");
 var urlActive = new URL (window.location);
 var pointId = urlActive.searchParams.get("id");
 var heading = document.getElementById("heading");
@@ -12,7 +12,7 @@ bootstrapValidate('#pointLongitude', 'numeric: Should be numeric');
 
 var marker;
 
-if(pointId == 0){
+if(pointId == 0 || pointId == undefined){
   initMap("53.9", "27.5");
   submitButton.addEventListener("click", addPoint);
 }
