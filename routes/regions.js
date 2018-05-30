@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const passport = require('passport');
 const pool = require('../db');
 
 const router = Router();
@@ -129,6 +130,22 @@ router.post('/complex', (request, response, next) => {
 		}
 	}
 });
+
+//TEST
+
+/*router.post('/login',
+	passport.authenticate('local'),
+	function(req, res) {
+		
+    res.redirect('/users/' + req.user.username);
+});*/
+
+router.post('/login',
+    passport.authenticate('local', { successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true })
+);
+
 
 router.put('/:id', (request, response, next) => {
 	const { id } = request.params; 

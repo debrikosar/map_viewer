@@ -4,11 +4,12 @@
 <head>
 	<title>Map viewer</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 </head>
 
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default" id="navbarMenu">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-nav-demo" aria-expanded="false">
@@ -37,14 +38,16 @@
 
 
 	<div class="container">
-		<h1 align="center">Regions</h1>
+		<h1 align="center" class="custom_heading">Regions</h1>
 	
 		<p align="right">
-			<input type="button" class="btn btn-primary" id="add" value="Add" onclick="window.location.href='AddRegion.html?id=0'"/>
+			<button type="button" class="btn btn-default" id="add" title="Add region" onclick="window.location.href='AddRegion.html?id=0'">
+				<i class="fa fa-plus-square-o fa-2x"></i>
+   			</button>
 		</p>
 
-		<table class="table" align="center">
-			<thead align="center" style="background-color: #f8f8f8;">
+		<table class="table" align="center" id="regionsTable">
+			<thead align="center" class="custom_thead">
 				<td width="200">Name</td>
 				<td width="600">Description</td>
 				<td width="100">Actions</td>

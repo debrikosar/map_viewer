@@ -47,7 +47,10 @@ function createPaginator(data){
 
 	for (let i = 0; i < pagesCount; i++){		
 		var pageItem = document.createElement("li");
-		pageItem.className = "page-item";
+		if(i==page-1)
+			pageItem.className = "page-item active";
+		else
+			pageItem.className = "page-item";
 		var a = document.createElement("a");
 		a.className = "page-link";
 		a.innerHTML = i+1;
@@ -90,9 +93,13 @@ function show(data){
 		var b1 = document.createElement("button");
 		var b2 = document.createElement("button");
 
-		b.className = "btn"; 
-		b1.className = "btn"; 
-		b2.className = "btn"; 
+		b.className = "btn btn-default"; 
+		b1.className = "btn btn-default"; 
+		b2.className = "btn btn-default"; 
+
+		b.title = "Show on map";
+		b1.title = "Edit";
+		b2.title = "Delete";
 
 		b.addEventListener("click", function(){
 			window.location = "RegionMap.html?id=" + data[i].id;

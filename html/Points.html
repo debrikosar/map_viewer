@@ -4,6 +4,7 @@
 <head>
 	<title>Map viewer</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 </head>
 
@@ -40,10 +41,12 @@
 		<h1 align="center">Points</h1>
 	
 		<p align="right">
-			<input type="button" class="btn btn-primary" id="add" value="Add" onclick="window.location.href='AddWindow.html?id=0'"/>
+			<button type="button" class="btn btn-default" id="add" title="Add point" onclick="window.location.href='AddWindow.html?id=0'">
+				<i class="fa fa-plus-square-o fa-2x"></i>
+   			</button>
 		</p>
 
-		<table class="table" align="center">
+		<table class="table" align="center" id="regionsTable">
 			<thead align="center" style="background-color: #f8f8f8;">
 				<td width="200">Name</td>
 				<td width="100">Coordinates</td>

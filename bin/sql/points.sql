@@ -17,6 +17,12 @@ CREATE TABLE short_points(
 	coordinates point
 );
 
+CREATE TABLE users(
+	id serial,
+	username character varying(30),
+	password character varying(30)
+);
+
 INSERT INTO points(name, coordinates, description)
 VALUES
 ('BSTU', '(53, 27)', 'Description'),
@@ -34,4 +40,10 @@ INSERT INTO regions(name, description)
 VALUES
 ('Test', 'Description'),
 ('Test2', 'Description2');
+
+INSERT INTO users(username, password)
+VALUES
+('User', 'Password'),
+('User2', 'Password2');
+
 
